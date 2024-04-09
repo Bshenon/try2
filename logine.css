@@ -1,0 +1,49 @@
+        body {
+            font-family: 'Playfair Display', serif; /* Use Playfair Display font */
+            color: white; /* Set text color to white */
+            text-align: center; /* Center-align text */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(elepant\ login.jpg); /* Add background image */
+            background-size:cover; /* Ensure the background image covers the entire viewport */
+        }
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.878); /* Set background color for login container with some transparency */
+            padding: 200px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add shadow effect */
+            animation: slide-up 0.9s ease-out; /* Add slide-up animation */
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px 80px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333; /* Set input background color */
+            color: white; /* Set input text color */
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Set button background color */
+            color: white; /* Set button text color */
+            cursor: pointer;
+        }
+        
+        /* Define slide-up animation */
+        @keyframes slide-up {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }

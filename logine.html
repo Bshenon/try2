@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="logine.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,800;1,400&display=swap" rel="stylesheet">
+    <title>Login - Sri Lankan Wild Life</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form onsubmit="login(event)">
+            <input type="text" id="username" placeholder="Username" required style=" text-align: center;"><br>
+            <input type="password" id="password" placeholder="Password" required  style=" text-align: center;"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        function login(event) {
+            event.preventDefault(); // Prevent form submission
+            const username = document.getElementById('username').value; // Get username from input field
+            const password = document.getElementById('password').value; // Get password from input field
+
+            // Perform authentication (replace this with your authentication logic)
+            if (username === "admin" && password === "admin123") {
+                localStorage.setItem('loggedInUser', username); // Store logged-in user in localStorage
+                window.location.href = "dash.html"; // Redirect to example.html page
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>

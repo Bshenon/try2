@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="yala.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,800;1,400&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>Wildlife in Sri Lanka</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body>
+    <section class="header" id="yalahdr">
+        <nav class="sticky">
+            <a href="index.html"><img src="new new.png"></a>
+            <section class="topnav"><b>
+                <a href="index.html">Home</a>
+                <a href="introduction.html">Introduction </a>
+                <a href="conserve.html"> Conservation</a>
+                <section class="dropdown">
+                    <button class="dropbtn"><a href=#><b>Animals ▾</b></a></button>
+                    <section class="dropdown-content">
+                        <a href="indigenous.html"> Indigenous Animals </a>
+                        <a href="leopards.html">Leopards</a>
+                    </section>  
+                </section>
+                <section class="dropdown">
+                    <button class="dropbtn"><a href=#><b>National Parks ▾</b></a></button>
+                    <section class="dropdown-content">
+                        <a class="active" href="yala.html">Yala Park</a>
+                        <a href="wilpaththu.html">Wilpaththu Park</a>
+                    </section>
+                </section>
+                <a href="contact.html" id="button">Contact</a>
+                <a href="logine.html" id="contactbutton">Login</a>
+            </b></section>
+        </nav>
+
+
+    <div x-data = "willData">
+        <section class="yala_content">
+            <h3 x-text="willText"></h3>
+            <section class="parent">
+                <section class="child">
+                </section>
+            </section>
+        </section>
+        <section class="sections">
+        <section class="section_1">
+                <p x-text="willInfo" class="editable" contenteditable="true"></p>
+        </section>
+        <section class="section_2">
+                <p x-text="willinfoOne" class="editable" contenteditable="true"></p>
+        </section>
+        </section>
+        <section class="yala" id="yalaparkhdr">
+            <p x-text="moreinfo"><b class="symbol" class="editable" contenteditable="true"></p>
+        </section>
+        <section class="yala_map">
+            <h3>Wilpaththu National Park Location: Google Map</h3>
+            <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d505153.2015998011!2d79.70708348661616!3d8.449741952813257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afdac7787e4bc27%3A0xcdd9a0715dad187c!2sWilpattu%20National%20Park!5e0!3m2!1sen!2slk!4v1705649699440!5m2!1sen!2slk" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+        </section>
+    
+        <section class="yala_animals">
+            <h3> Animals in the park</h3>
+            <section class="yala-image">
+                <section class="yala-box">
+                    <img src="bear.jpg" alt="elephant">
+                    <section class="overlay">
+                        <p>Wild Bear</p>
+                    </section>
+                </section>
+                <section class="yala-box">
+                    <img src="deer.jpg" alt="peacock">
+                    <section class="overlay">
+                        <p>wild Deer</p>
+                    </section>
+                </section>
+                <section class="yala-box">
+                    <img src="owl.jpg" alt="deer">
+                    <section class="overlay">
+                        <p>black owl</p>
+                    </section>
+                </section>
+            </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </div>
+
+    <script>
+        const willData = {
+            "willText":'',
+            "willInfo":'',
+            "willinfoOne":'',
+            "moreinfo":'',
+        };
+        fetch ('wilpaththu.json')
+            .then ( response => response.json())
+            .then (data => {
+                willData.willText =data.willText;
+                willData.willInfo =data.willInfo;
+                willData.willinfoOne =data.willinfoOne;
+                willData.moreinfo =data.willInfo      
+    
+        })
+            .catch(error => console.error('Error fetching data:', error));
+    
+    </script>
+    <script>
+        // Check if the user is logged in
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            window.location.href = "login.html"; // Redirect to login page if not logged in
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            let editingEnabled = false; // Variable to track whether editing is enabled
+    
+            // Function to toggle editing mode
+            function toggleEditing() {
+                editingEnabled = !editingEnabled; // Toggle editing mode
+                const editableElements = document.querySelectorAll('[contenteditable]');
+                editableElements.forEach(element => {
+                    element.contentEditable = editingEnabled;
+                });
+    
+                // Change button text
+                const button = document.querySelector('.edit-button');
+                button.textContent = editingEnabled ? 'Save' : 'Edit Text';
+            }
+    
+            // Function to edit text content
+            function editTextContent(event) {
+                if (!editingEnabled) return; // Exit if editing is not enabled
+    
+                var target = event.target;
+                if (target.hasAttribute('contenteditable')) {
+                    var newText = prompt("Enter the new content:");
+                    if (newText !== null) {
+                        target.innerText = newText;
+                    }
+                }
+            }
+    
+            // Attach click event listener only to elements with the class 'editable'
+            const editableElements = document.querySelectorAll('.editable');
+            editableElements.forEach(element => {
+                element.addEventListener('click', editTextContent);
+            });
+    
+            // Attach click event listener to the edit button
+            const editButton = document.querySelector('.edit-button');
+            editButton.addEventListener('click', toggleEditing);
+        });
+    </script>
+    
+    <br>
+
+    <!-- Footer -->
+<!-- Footer -->
+<footer>
+    <section class="container">
+        <section class="footer-content" style="text-align: center;">
+            <h2 id="footerContent" style="padding-bottom: 20px;" contenteditable="false">Contact Us</h2>
+            <p style="margin: 5px 0;" contenteditable="false"><b>Email:</b> slwild@gmail.com</p>
+            <p style="margin: 5px 0;" contenteditable="false"><b>Phone:</b> +94 324 523 4234 </p>
+            <p style="margin: 5px 0;" contenteditable="false"><b>Address:</b> Sri lankan wildlife, 321. yalla</p>
+            <!-- Newsletter Subscription Form -->
+            <section class="newsletterForm">
+            <form id="newsletterForm" onsubmit="subscribeNewsletter(event)" style="margin-top: 20px;">
+                <input type="email" id="emailInput" placeholder="Enter your email" required style="padding: 10px; border: 2px solid #000000; border-radius: 5px; width: 200px;">
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+            <button class="edit-button" onclick="toggleEditing()">Edit Text</button>
+        </section>
+    </section>
+    <h2 style="padding-top: 50px;">Socials</h2>
+    <section class="social-icons">
+        <a class="btn" href="https://www.facebook.com/" target="_blank"><iconify-icon icon="ic:baseline-facebook"></iconify-icon></a>
+        <a class="btn" href="https://www.youtube.com/" target="_blank"><iconify-icon icon="mdi:youtube"></iconify-icon></a>
+        <a class="btn" href="https://www.instagram.com/" target="_blank"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+        <a class="btn" href="https://www.twitter.com/" target="_blank"><iconify-icon icon="mdi:twitter"></iconify-icon></a>
+    </section>
+</footer>
+
+
+    <!-- Script for Newsletter Subscription -->
+    <script>
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            let subscriptions = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+            subscriptions.push(email);
+            localStorage.setItem('newsletterSubscriptions', JSON.stringify(subscriptions));
+            alert('Subscribed successfully!');
+        }
+    </script>
+</body>
+</footer>
+<script>
+
+
+
+
+            // Store JSON data in localStorage
+            localStorage.setItem('yalaData', JSON.stringify(yalaData));
+
+            // Load JSON data when the page is loaded
+            const loadedData = JSON.parse(localStorage.getItem('yalaData'));
+
+
+        // Function to enable editing text content
+            // Function to toggle between editing and saving text
+    function toggleEditText() {
+        const buttonText = document.getElementById('editTextButton').innerText;
+        const section1Text = document.querySelector('.section_1 p');
+        const section2Text = document.querySelector('.section_2 p');
+        const yalaHeaderText = document.querySelector('.yala p');
+
+        if (buttonText === 'Edit Text') {
+            document.getElementById('editTextButton').innerText = 'Save';
+            section1Text.contentEditable = true;
+            section2Text.contentEditable = true;
+            yalaHeaderText.contentEditable = true;
+        } else {
+            document.getElementById('editTextButton').innerText = 'Edit Text';
+            section1Text.contentEditable = false;
+            section2Text.contentEditable = false;
+            yalaHeaderText.contentEditable = false;
+        }
+    }
+    </script>
+</body>
+</html>
